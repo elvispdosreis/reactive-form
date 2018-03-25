@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
 
     title = 'app';
 
-    cliente: FormGroup;
+    public cliente: FormGroup;
 
     pessoa: string[] = [
         'Física',
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
 
 
         this.cliente = this.fb.group({
-            email: [null, [Validators.required, Validators.email, Validators.maxLength(50)]],
+            email: ['elvisdosreis@gmail.com', [Validators.required, Validators.email, Validators.maxLength(50)]],
             tipo: ['Física', Validators.required],
             fisica: this.fb.group({
                 nome: [null, [Validators.required, Validators.maxLength(50)]],
