@@ -23,7 +23,6 @@ export class AppComponent implements OnInit {
     ];
 
     sexo: string[] = [
-        'Não Especificado',
         'Masculino',
         'Feminino'
     ];
