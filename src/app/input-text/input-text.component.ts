@@ -1,13 +1,17 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormControl, FormControlName, FormGroup, FormGroupDirective} from '@angular/forms';
+import {Component, forwardRef, Input, OnChanges} from '@angular/core';
+import {ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
     selector: 'app-input-text',
+    providers: [
+        {provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => InputTextComponent), multi: true},
+        {provide: NG_VALIDATORS, useExisting: forwardRef(() => InputTextComponent), multi: true}
+    ],
     template: `
-        <div class="form-group" [formGroup]="group">
+        <div class="form-group">
             <label class="form-control-label"> {{label}}: <span
                     class="star">*</span></label>
-            <input type="text" class="form-control" [formControlName]="id" [id]="id"/>
+            <input type="text" [value]="innerValue" class="form-control"/>
             <app-show-errors [control]="control"></app-show-errors>
         </div>
     `,
@@ -19,19 +23,55 @@ import {FormControl, FormControlName, FormGroup, FormGroupDirective} from '@angu
         top: 7px;
     }`]
 })
-export class InputTextComponent implements OnInit {
+export class InputTextComponent implements ControlValueAccessor, OnChanges {
 
-    control: FormControl;
-
-    @Input() id: string;
     @Input() label: string;
-    @Input() group: FormGroup;
 
-    constructor(private formGroupDirective: FormGroupDirective) {
+    private innerValue: string;
+
+    private control: FormControl;
+
+    ngOnChanges(inputs) {
+        console.log('change');
+        console.log(inputs);
+        /*
+        if (inputs.counterRangeMax || inputs.counterRangeMin) {
+            this.validateFn = createCounterRangeValidator(this.counterRangeMax, this.counterRangeMin);
+            this.propagateChange(this.counterValue);
+        }
+        */
     }
 
-    ngOnInit() {
-        this.control = this.formGroupDirective.control.get(this.id) as FormControl;
-        console.log(this.group);
+    writeValue(obj: any): void {
+        console.log('write');
+        this.value = obj;
+        if (obj) {
+            console.log(obj);
+        }
+    }
+
+    registerOnChange(fn: any): void {
+        console.log('registerOnChange');
+        console.log(fn);
+    }
+
+    registerOnTouched(fn: any): void {
+    }
+
+    setDisabledState(isDisabled: boolean): void {
+    }
+
+    get value(): any {
+        return this.innerValue;
+    }
+
+    set value(v: any) {
+        if (v !== this.innerValue) {
+            this.innerValue = v;
+        }
+    }
+
+    validate(c: FormControl) {
+        this.control = c;
     }
 }
