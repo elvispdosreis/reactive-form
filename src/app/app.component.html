@@ -9,25 +9,12 @@
                 <div class="card-content">
 
 
-                    <form method="get" action="/" [formGroup]="cliente">
-
+                    <form method="get" action="/" [formGroup]="cliente" (ngSubmit)="onSubmit()">
 
                         <fieldset>
                             <div class="col-xs-8 col-md-8">
-
-                                <app-input-text formControlName="email" label="Email"></app-input-text>
-
-                                <!--
-                                <div class="form-group">
-                                    <label class="form-control-label required" for="email"> EMAIL:</label>
-                                    <input class="form-control" type="email" id="email" formControlName="email"/>
-                                    <app-show-errors [control]="cliente.controls.email"></app-show-errors>
-                                </div>
-                                -->
-
+                                <app-input-text formControlName="email" label="EMAIL"></app-input-text>
                             </div>
-
-
                             <div class="col-xs-4 col-md-4">
                                 <div class="form-group">
                                     <label class="form-control-label required" for="tipo"> TIPO DE PESSOA:</label>
@@ -40,48 +27,30 @@
                         </fieldset>
 
                         <div class="fisica" formGroupName="fisica" *ngIf="cliente.get('tipo').value === 'Física'">
+
                             <fieldset>
                                 <div class="col-xs-4 col-md-4">
-                                   <app-input-text formControlName="nome" label="Nome"></app-input-text>
+                                    <app-input-text formControlName="nome" label="NOME"></app-input-text>
                                 </div>
                                 <div class="col-xs-8 col-md-8 pull-right">
-                                    <div class="form-group">
-                                        <label class="form-control-label required" for="sobrenome">
-                                            SOBRENOME:</label>
-                                        <input type="text" class="form-control" id="sobrenome"
-                                               formControlName="sobrenome"/>
-                                        <app-show-errors
-                                                [control]="cliente.controls.fisica.controls.sobrenome"></app-show-errors>
-                                    </div>
+                                    <app-input-text formControlName="sobrenome" label="SOBRENOME"></app-input-text>
                                 </div>
                             </fieldset>
+
                             <fieldset>
                                 <div class="col-xs-6 col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label required" for="cpf"> CPF:</label>
-                                        <input type="text" class="form-control" id="cpf" formControlName="cpf"/>
-                                        <app-show-errors
-                                                [control]="cliente.controls.fisica.controls.cpf"></app-show-errors>
-                                    </div>
+                                    <app-input-text formControlName="cpf" label="CPF"></app-input-text>
                                 </div>
                                 <div class="col-xs-6 col-md-6 pull-right">
-                                    <div class="form-group">
-                                        <label class="form-control-label required" for="rg"> RG:</label>
-                                        <input type="text" class="form-control" id="rg" formControlName="rg"/>
-                                        <app-show-errors
-                                                [control]="cliente.controls.fisica.controls.rg"></app-show-errors>
-                                    </div>
+                                    <app-input-text formControlName="rg" label="RG"></app-input-text>
                                 </div>
                             </fieldset>
+
                             <fieldset>
                                 <div class="col-xs-6 col-md-6">
                                     <div class="form-group">
-                                        <label class="form-control-label required" for="data_nascimento"> DATA DE
-                                            NASCIMENTO:</label>
-                                        <input type="text" class="form-control" id="data_nascimento"
-                                               formControlName="data_nascimento"/>
-                                        <app-show-errors
-                                                [control]="cliente.controls.fisica.controls.data_nascimento"></app-show-errors>
+                                        <app-input-text formControlName="data_nascimento" label="DATA DE
+                                            NASCIMENTO"></app-input-text>
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-md-6 pull-right">
@@ -94,85 +63,54 @@
                                     </div>
                                 </div>
                             </fieldset>
+
                         </div>
                         <div class="juridica" formGroupName="juridica"
                              *ngIf="cliente.get('tipo').value === 'Jurídica'">
+
                             <fieldset>
                                 <div class="col-xs-7 col-md-7">
-                                    <div class="form-group">
-                                        <label class="form-control-label required" for="razao_social"> RAZ&Atilde;O
-                                            SOCIAL:</label>
-                                        <input type="text" class="form-control" id="razao_social"
-                                               formControlName="razao_social"/>
-                                        <app-show-errors
-                                                [control]="cliente.controls.juridica.controls.razao_social"></app-show-errors>
-                                    </div>
+                                    <app-input-text formControlName="razao_social" label="RAZ&Atilde;O
+                                            SOCIAL"></app-input-text>
                                 </div>
                                 <div class="col-xs-5 col-md-5 pull-right">
-                                    <div class="form-group">
-                                        <label class="form-control-label required" for="contato">
-                                            RESPONS&Aacute;VEL:</label>
-                                        <input type="text" class="form-control" id="contato"
-                                               formControlName="contato"/>
-                                        <app-show-errors
-                                                [control]="cliente.controls.juridica.controls.contato"></app-show-errors>
-                                    </div>
+                                    <app-input-text formControlName="contato" label="RESPONSÁVEL"></app-input-text>
                                 </div>
                             </fieldset>
+
                             <fieldset>
                                 <div class="col-xs-6 col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label required" for="cnpj"> CNPJ:</label>
-                                        <input type="text" class="form-control" id="cnpj" formControlName="cnpj"/>
-                                        <app-show-errors
-                                                [control]="cliente.controls.juridica.controls.cnpj"></app-show-errors>
-                                    </div>
+                                    <app-input-text formControlName="cnpj" label="CNPJ"></app-input-text>
                                 </div>
                                 <div class="col-xs-6 col-md-6 pull-right">
-                                    <div class="form-group">
-                                        <label class="form-control-label required" for="ie"> IE:</label>
-                                        <input type="text" class="form-control" id="ie" formControlName="ie"/>
-                                        <app-show-errors
-                                                [control]="cliente.controls.juridica.controls.ie"></app-show-errors>
-                                    </div>
+                                    <app-input-text formControlName="ie" label="IE"></app-input-text>
                                 </div>
                             </fieldset>
+
                         </div>
                         <div formGroupName="fone">
+
                             <fieldset>
                                 <div class="col-xs-6 col-md-6 pull-right">
-                                    <div class="form-group">
-                                        <label class="form-control-label required" for="celular"> CELULAR:</label>
-                                        <input type="text" class="form-control" id="celular"
-                                               formControlName="celular"/>
-                                        <app-show-errors
-                                                [control]="cliente.controls.fone.controls.celular"></app-show-errors>
-                                    </div>
+                                    <app-input-text formControlName="celular" label="CELULAR"></app-input-text>
                                 </div>
                                 <div class="col-xs-6 col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="fixo"> TELEFONE FIXO</label>
-                                        <input type="text" class="form-control" id="fixo" formControlName="fixo"/>
-                                        <app-show-errors
-                                                [control]="cliente.controls.fone.controls.fixo"></app-show-errors>
-                                    </div>
+                                    <app-input-text formControlName="fixo" label="TELEFONE FIXO"></app-input-text>
                                 </div>
                             </fieldset>
+
                         </div>
 
                         <fieldset>
                             <div class="col-xs-12 col-md-12">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="conhecimento"> COMO NOS
-                                        CONHECEU</label>
-                                    <input type="text" class="form-control" id="conhecimento"
-                                           formControlName="conhecimento"/>
-                                </div>
+                                <app-input-text formControlName="conhecimento" label="COMO NOS
+                                        CONHECEU"></app-input-text>
                             </div>
                         </fieldset>
 
                         <div formGroupName="endereco">
                             <h5>Endereço Principal</h5>
+
                             <fieldset>
                                 <div class="col-xs-2 col-md-2">
                                     <div class="form-group">
@@ -184,12 +122,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xs-6 col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label required" for="cep"> CEP:</label>
-                                        <input type="text" class="form-control" id="cep" formControlName="cep"/>
-                                        <app-show-errors
-                                                [control]="cliente.controls.endereco.controls.cep"></app-show-errors>
-                                    </div>
+                                    <app-input-text formControlName="cep" label="CEP"></app-input-text>
                                 </div>
                                 <div class="col-xs-4 col-md-4 pull-right">
                                     <div class="form-group">
@@ -203,88 +136,43 @@
 
                             <fieldset>
                                 <div class="col-xs-8 col-md-8">
-                                    <div class="form-group">
-                                        <label class="form-control-label required" for="logradouro">
-                                            ENDERE&Ccedil;O:</label>
-                                        <input type="text" class="form-control" id="logradouro"
-                                               formControlName="logradouro">
-                                        <app-show-errors
-                                                [control]="cliente.controls.endereco.controls.logradouro"></app-show-errors>
-                                    </div>
+                                    <app-input-text formControlName="logradouro" label="ENDEREÇO"></app-input-text>
                                 </div>
                                 <div class="col-xs-4 col-md-4 pull-right">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="numero"> N&Uacute;MERO</label>
-                                        <input type="text" class="form-control" id="numero"
-                                               formControlName="numero"/>
-                                        <app-show-errors
-                                                [control]="cliente.controls.endereco.controls.numero"></app-show-errors>
-                                    </div>
+                                    <app-input-text formControlName="numero" label="NÚMERO"></app-input-text>
                                 </div>
                             </fieldset>
+
                             <fieldset>
                                 <div class="col-xs-12 col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="complemento"> COMPLEMENTO</label>
-                                        <input type="text" class="form-control" id="complemento"
-                                               formControlName="complemento"/>
-                                        <app-show-errors
-                                                [control]="cliente.controls.endereco.controls.complemento"></app-show-errors>
-                                    </div>
+                                    <app-input-text formControlName="complemento" label="COMPLEMENTO"></app-input-text>
                                 </div>
                             </fieldset>
+
                             <fieldset>
                                 <div class="col-xs-6 col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label required" for="bairro"> BAIRRO:</label>
-                                        <input type="text" class="form-control" id="bairro"
-                                               formControlName="bairro"/>
-                                        <app-show-errors
-                                                [control]="cliente.controls.endereco.controls.bairro"></app-show-errors>
-                                    </div>
+                                    <app-input-text formControlName="bairro" label="BAIRRO"></app-input-text>
                                 </div>
                                 <div class="col-xs-6 col-md-6 pull-right">
-                                    <div class="form-group">
-                                        <label class="form-control-label required" for="localidade"> CIDADE:</label>
-                                        <input type="text" class="form-control" id="localidade"
-                                               formControlName="localidade" readonly/>
-                                        <app-show-errors
-                                                [control]="cliente.controls.endereco.controls.localidade"></app-show-errors>
-                                    </div>
+                                    <app-input-text formControlName="localidade" label="CIDADE"></app-input-text>
                                 </div>
                             </fieldset>
+
                             <fieldset>
                                 <div class="col-xs-6 col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label required" for="estado"> ESTADO:</label>
-                                        <input type="text" class="form-control" id="estado" formControlName="estado"
-                                               readonly/>
-                                        <app-show-errors
-                                                [control]="cliente.controls.endereco.controls.estado"></app-show-errors>
-                                    </div>
+                                    <app-input-text formControlName="estado" label="ESTADO"></app-input-text>
                                 </div>
                                 <div class="col-xs-6 col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-control-label required" for="pais"> PAIS:</label>
-                                        <input type="text" class="form-control" id="pais" formControlName="pais"
-                                               readonly/>
-                                        <app-show-errors
-                                                [control]="cliente.controls.endereco.controls.pais"></app-show-errors>
-                                    </div>
+                                    <app-input-text formControlName="pais" label="PAIS"></app-input-text>
                                 </div>
                             </fieldset>
+
                             <fieldset>
                                 <div class="col-xs-12 col-md-12">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="referencia"> REFER&Ecirc;NCIA</label>
-                                        <textarea class="form-control" id="referencia" formControlName="referencia"
-                                                  size="30"
-                                                  rows="1"></textarea>
-                                        <app-show-errors
-                                                [control]="cliente.controls.endereco.controls.referencia"></app-show-errors>
-                                    </div>
+                                    <app-input-text formControlName="referencia" label="REFERÊNCIA"></app-input-text>
                                 </div>
                             </fieldset>
+
                         </div>
 
                         <div class="category"><span class="star">*</span> Campos obrigatórios</div>
@@ -296,8 +184,6 @@
                                     <input type="checkbox" id="newsletter" formControlName="newsletter"/>
                                     Quer acompanhar por e-mail novidades e promo&ccedil;&otilde;es?</label>
                             </div>
-
-
                             <div class="form-group text-right">
                                 <button type="submit" class="btn btn-info btn-fill btn-wd">Salvar</button>
                             </div>

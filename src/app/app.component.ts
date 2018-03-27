@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
             fisica: this.fb.group({
                 nome: [null, [Validators.required, Validators.maxLength(50)]],
                 sobrenome: [null, [Validators.required, Validators.maxLength(50)]],
-                cpf: [null, [Validators.required, Validators.pattern('/^\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}$/')]],
+                cpf: [null, [Validators.required]],
                 rg: [null, Validators.required],
                 data_nascimento: [null, Validators.required],
                 sexo: [null, Validators.required]
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
             juridica: this.fb.group({
                 razao_social: [null, [Validators.required, Validators.maxLength(100)]],
                 contato: [null, [Validators.required, Validators.maxLength(50)]],
-                cnpj: [null, [Validators.required, Validators.pattern('/^\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2}$/')]],
+                cnpj: [null, [Validators.required]],
                 ie: [null, Validators.required, Validators.maxLength(30)]
             }),
             fone: this.fb.group({
@@ -87,6 +87,13 @@ export class AppComponent implements OnInit {
         });
 
         this.cliente.patchValue({
+            fone: {
+                fixo: null,
+                celular: null
+            }
+        });
+
+        this.cliente.patchValue({
             fisica: {
                 nome: 'Elvis',
                 sobrenome: 'Perpetuo dos Reis',
@@ -97,5 +104,26 @@ export class AppComponent implements OnInit {
             }
         });
 
+    }
+
+
+    onSubmit() {
+
+        if (this.cliente.valid) {
+            console.log('valid');
+        } else {
+            console.log('invalid');
+            this.formValidate(this.cliente);
+        }
+    }
+
+    formValidate(formGroup: FormGroup) {
+        Object.keys(formGroup.controls).forEach(field => {
+            const control = formGroup.get(field);
+            control.markAsDirty();
+            if (control instanceof FormGroup) {
+                this.formValidate(control);
+            }
+        });
     }
 }
