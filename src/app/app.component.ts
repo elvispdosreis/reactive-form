@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
+
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -9,6 +11,16 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class AppComponent implements OnInit {
 
     title = 'app';
+
+    public opcoes: {}[] = [
+        {value: 'waiting_payment', label: 'Aguardando Pagamento'},
+        {value: 'approved', label: 'Pagamento Autorizado'},
+        {value: 'handling', label: 'Pedido Separado'},
+        {value: 'shipped', label: 'Pedido Enviado'},
+        {value: 'delivered', label: 'Pedido Entregue'},
+        {value: 'shipped_exception', label: 'Pendência Entrega'},
+        {value: 'canceled', label: 'Cancelado'}
+    ];
 
     public cliente: FormGroup;
 

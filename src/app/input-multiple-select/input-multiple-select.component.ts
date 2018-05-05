@@ -1,6 +1,13 @@
 import {AfterViewInit, Component, ElementRef, forwardRef, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 
+declare const $: any;
+
+export interface Option {
+    label: string;
+    value: string;
+}
+
 @Component({
     selector: 'app-input-multiple-select',
     providers: [
@@ -10,7 +17,7 @@ import {ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR} fro
     template: `
         <div class="form-group">
             <label class="form-control-label" *ngIf="label">{{label}}:</label>
-            <select multiple title="{{title}}" class="form-control" data-style="btn-info btn-fill btn-block" data-size="7"
+            <select multiple title="{{title}}" class="form-control" data-style="btn-block" data-size="7"
                     (change)="onChange($event)">
                 <option *ngFor="let option of options" [value]="option.value">{{option.label}}</option>
             </select>
@@ -24,7 +31,7 @@ export class InputMultipleSelectComponent implements ControlValueAccessor, OnIni
 
     @Input() label: string;
     @Input() help: string;
-    @Input() options: {}[];
+    @Input() options: Option[];
     @Input() title: string;
     @Input() formControlName: any;
     private readonly errorMessages = {

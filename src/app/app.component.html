@@ -103,8 +103,10 @@
 
                         <fieldset>
                             <div class="col-xs-12 col-md-12">
-                                <app-input-text formControlName="conhecimento" label="COMO NOS
-                                        CONHECEU"></app-input-text>
+                                <app-input-multiple-select [label]="'COMO NOS CONHECEU'" formControlName="conhecimento"
+                                                           [options]="opcoes"
+                                                           [title]="'COMO NOS CONHECEU'"
+                                                           [help]="'Selecione um ou mais'"></app-input-multiple-select>
                             </div>
                         </fieldset>
 
@@ -198,5 +200,5 @@
             </div>  <!-- end card -->
         </div> <!-- end col-md-12 -->
     </div> <!-- end row -->
-    <p>Form value: {{ cliente.value | json }}</p>
+    <pre>Form value: {{ cliente.value | json }}</pre>
 </div>
