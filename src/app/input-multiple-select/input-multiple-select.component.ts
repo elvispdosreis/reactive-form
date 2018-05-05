@@ -37,8 +37,9 @@ export class InputMultipleSelectComponent implements ControlValueAccessor, OnIni
     private readonly errorMessages = {
         'required': () => 'Este campo é requerido.'
     };
-    private innerValue: any;
+    protected innerValue: any;
     private control: FormControl;
+
     private propagateChange = (_: any) => {
     };
 
@@ -49,16 +50,14 @@ export class InputMultipleSelectComponent implements ControlValueAccessor, OnIni
     }
 
     ngAfterViewInit() {
-        $('select').selectpicker({
+        $('select', this.el.nativeElement).selectpicker({
             iconBase: 'ti',
             tickIcon: 'ti-check'
         });
     }
 
     onChange(event) {
-
-        console.log('b', event.target.value || []);
-        this.propagateChange(event.target.value);
+        this.propagateChange($('select', this.el.nativeElement).val());
     }
 
     registerOnChange(fn: any): void {
@@ -91,7 +90,6 @@ export class InputMultipleSelectComponent implements ControlValueAccessor, OnIni
         this.control = c;
     }
 
-    // Form Validator
     shouldShowErrors(): boolean {
         return this.control &&
             this.control.errors &&
